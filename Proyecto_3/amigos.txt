@@ -1,0 +1,7 @@
+carlos,otaku
+carlos,lester
+carlos,alex
+otaku,inti
+lester,miguel
+alex,oscar
+oscar,bryan
