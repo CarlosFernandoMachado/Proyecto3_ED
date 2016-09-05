@@ -38,7 +38,29 @@ public class Proyecto_3 {
         for (Node node : graph) {
             node.addAttribute("ui.label", node.getId());
         }
-        
+        int opcion = 0;
+        System.out.println("Se recomienda al usuario que al momento de visualizar la grafica se mantenga la pestaña abierta\nYa que esta se va ir actualizando con lo que vaya haciendo\npuede poner el programa a un lado\n y la grafica al otro");
+        while (opcion != 4) {
+            System.out.print("1) Visualizar grafo\n2) Ver si dos personas son amigos\n3) Conectar a otra persona mediante amigos\n4) Salir\nOpcion: ");
+            opcion = sc.nextInt();
+            if (opcion == 1) {
+                graph.display();
+            } else if (opcion == 2) {
+                System.out.print("Ingrese el nombre de la primera persona: ");
+                String nombre1 = sc.next();
+                System.out.print("Ingrese el nombre de la segunda persona: ");
+                String nombre2 = sc.next();
+                if (graph.getNode(nombre1).hasEdgeBetween(nombre2)) {
+                    System.out.println(nombre1 + " y " + nombre2 + " son amigos!");
+                } else {
+                    System.out.println(nombre1 + " y " + nombre2 + " no son amigos!");
+                }
+            } else if (opcion == 3) {
+                
+            }else{
+                
+            }
+        }
     }
 
     public static ArrayList<Persona> leerarchivo() {
