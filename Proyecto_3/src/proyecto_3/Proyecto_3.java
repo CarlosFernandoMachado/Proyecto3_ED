@@ -9,6 +9,9 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.Scanner;
+import org.graphstream.graph.Graph;
+import org.graphstream.graph.Node;
+import org.graphstream.graph.implementations.MultiGraph;
 
 /**
  *
@@ -23,6 +26,18 @@ public class Proyecto_3 {
         // TODO code application logic here
         Scanner sc = new Scanner(System.in);
         ArrayList<Persona> personas = leerarchivo();
+        Graph graph = new MultiGraph("Amigos");
+        for (int i = 0; i < personas.size(); i++) {
+            graph.addNode(personas.get(i).getNombre());
+        }
+        for (int i = 0; i < personas.size(); i++) {
+            for (int j = 0; j < personas.get(i).getAmigos().size(); j++) {
+                graph.addEdge(personas.get(i).getNombre() + personas.get(i).getAmigos().get(j).getNombre(), personas.get(i).getNombre(), personas.get(i).getAmigos().get(j).getNombre());
+            }
+        }
+        for (Node node : graph) {
+            node.addAttribute("ui.label", node.getId());
+        }
         
     }
 
