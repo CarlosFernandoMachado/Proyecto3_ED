@@ -28,6 +28,8 @@ public class Proyecto_3 {
         // TODO code application logic here
         Scanner sc = new Scanner(System.in);
         ArrayList<Persona> personas = leerarchivo();
+        boolean validar = false;
+        String nombre1 = "", nombre2 = "";
         Graph graph = new MultiGraph("Amigos");
         for (int i = 0; i < personas.size(); i++) {
             graph.addNode(personas.get(i).getNombre());
@@ -48,20 +50,56 @@ public class Proyecto_3 {
             if (opcion == 1) {
                 graph.display();
             } else if (opcion == 2) {
-                System.out.print("Ingrese el nombre de la primera persona: ");
-                String nombre1 = sc.next();
-                System.out.print("Ingrese el nombre de la segunda persona: ");
-                String nombre2 = sc.next();
+                while (!validar) {
+                    System.out.print("Ingrese el nombre de la primera persona: ");
+                    nombre1 = sc.next();
+                    for (int i = 0; i < personas.size(); i++) {
+                        if (personas.get(i).getNombre().equals(nombre1)) {
+                            validar = true;
+                            break;
+                        }
+                    }
+                }
+                validar = false;
+                while (!validar) {
+                    System.out.print("Ingrese el nombre de la segunda persona: ");
+                    nombre2 = sc.next();
+                    for (int i = 0; i < personas.size(); i++) {
+                        if (personas.get(i).getNombre().equals(nombre2)) {
+                            validar = true;
+                            break;
+                        }
+                    }
+                }
+                validar = false;
                 if (graph.getNode(nombre1).hasEdgeBetween(nombre2)) {
                     System.out.println(nombre1 + " y " + nombre2 + " son amigos!");
                 } else {
                     System.out.println(nombre1 + " y " + nombre2 + " no son amigos!");
                 }
             } else if (opcion == 3) {
-                System.out.print("Ingrese el nombre de la primera persona: ");
-                String nombre1 = sc.next();
-                System.out.print("Ingrese el nombre de la segunda persona: ");
-                String nombre2 = sc.next();
+                while (!validar) {
+                    System.out.print("Ingrese el nombre de la primera persona: ");
+                    nombre1 = sc.next();
+                    for (int i = 0; i < personas.size(); i++) {
+                        if (personas.get(i).getNombre().equals(nombre1)) {
+                            validar = true;
+                            break;
+                        }
+                    }
+                }
+                validar = false;
+                while (!validar) {
+                    System.out.print("Ingrese el nombre de la segunda persona: ");
+                    nombre2 = sc.next();
+                    for (int i = 0; i < personas.size(); i++) {
+                        if (personas.get(i).getNombre().equals(nombre2)) {
+                            validar = true;
+                            break;
+                        }
+                    }
+                }
+                validar = false;
                 AStar astar = new AStar(graph);
                 astar.compute(nombre1, nombre2);
                 Path path = astar.getShortestPath();
@@ -70,12 +108,12 @@ public class Proyecto_3 {
                     System.out.println("Desea presentarlos?si/no");
                     String ans = sc.next();
                     if (ans.equals("si") || ans.equals("Si") || ans.equals("sI") || ans.equals("SI")) {
-                        graph.addEdge(nombre1+nombre2, nombre1, nombre2);
+                        graph.addEdge(nombre1 + nombre2, nombre1, nombre2);
                     }
                 } else {
                     System.out.println(nombre1 + " y " + nombre2 + " no se pueden llegar a conocer ya que no tienen amigos en comun");
                 }
-            }else{
+            } else {
                 System.out.println("para salir cierre la pestaña de la grafica porfavor");
             }
         }
