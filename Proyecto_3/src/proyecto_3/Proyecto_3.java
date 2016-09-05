@@ -9,8 +9,10 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.Scanner;
+import org.graphstream.algorithm.AStar;
 import org.graphstream.graph.Graph;
 import org.graphstream.graph.Node;
+import org.graphstream.graph.Path;
 import org.graphstream.graph.implementations.MultiGraph;
 
 /**
@@ -56,9 +58,25 @@ public class Proyecto_3 {
                     System.out.println(nombre1 + " y " + nombre2 + " no son amigos!");
                 }
             } else if (opcion == 3) {
-                
+                System.out.print("Ingrese el nombre de la primera persona: ");
+                String nombre1 = sc.next();
+                System.out.print("Ingrese el nombre de la segunda persona: ");
+                String nombre2 = sc.next();
+                AStar astar = new AStar(graph);
+                astar.compute(nombre1, nombre2);
+                Path path = astar.getShortestPath();
+                if (path != null) {
+                    System.out.println(path);
+                    System.out.println("Desea presentarlos?si/no");
+                    String ans = sc.next();
+                    if (ans.equals("si") || ans.equals("Si") || ans.equals("sI") || ans.equals("SI")) {
+                        graph.addEdge(nombre1+nombre2, nombre1, nombre2);
+                    }
+                } else {
+                    System.out.println(nombre1 + " y " + nombre2 + " no se pueden llegar a conocer ya que no tienen amigos en comun");
+                }
             }else{
-                
+                System.out.println("para salir cierre la pestaña de la grafica porfavor");
             }
         }
     }
